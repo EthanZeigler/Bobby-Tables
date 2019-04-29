@@ -6,13 +6,9 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <!--p5.js for the canvas-->
-    <script src="js/p5/p5.min.js"></script>
-    <script src="js/p5/addons/p5.dom.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/graph.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
 
 </head>
 <body>
@@ -35,7 +31,12 @@
         </form>
     </div>
 </nav>
-<canvas id="myChart" width="400" height="400"></canvas>
-<script src="js/graph.js"></script>
+<div class="d-flex m-2 w-100">
+    <canvas id="myChart" class="col-auto w-75"></canvas>
+    <script src="js/graph.js"></script>
+    <div class="col-auto w-25 control-panel">
+        Content here
+    </div>
+</div>
 </body>
 </html>

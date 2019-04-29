@@ -2,6 +2,10 @@
     max-width: 600px;
 }
 
-.p5 {
+.w100 {
+    max-width: 100%
+}
 
+.control-panel {
+    min-width: 200px;
 }

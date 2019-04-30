@@ -1,27 +1,65 @@
+
+$("#select_state").change(function() {
+    // TODO AJAX for new values
+    var state = $(this).val();
+    new_items = // TODO
+    var optionsAsString = "";
+    for(var i = 0; i < productArray.length; i++) {
+        optionsAsString += "<option value='" + productArray[i] + "'>" + productArray[i] + "</option>";
+    }
+    $( 'select[name="inptProduct"]' ).append( optionsAsString );
+})
+        
+        .change(function () {
+            var deptid = $(this).val();
+
+            $.ajax({
+                url: 'getUsers.php',
+                type: 'post',
+                data: { depart: deptid },
+                dataType: 'json',
+                success: function (response) {
+
+                    var len = response.length;
+
+                    $("#sel_user").empty();
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id'];
+                        var name = response[i]['name'];
+
+                        $("#sel_user").append("<option value='" + id + "'>" + name + "</option>");
+
+                    }
+                }
+            });
+        });
+    });
+}
+
 const verticalLinePlugin = {
     getLinePosition: function (chart, pointIndex) {
         const meta = chart.getDatasetMeta(0); // first dataset is used to discover X coordinate of a point
-        const data = meta.data;p
+        const data = meta.data; p
         return data[pointIndex]._model.x;
     },
     renderVerticalLine: function (chartInstance, pointIndex) {
         const lineLeftOffset = this.getLinePosition(chartInstance, pointIndex);
         const scale = chartInstance.scales['y-axis-0'];
         const context = chartInstance.chart.ctx;
-  
+
         // render vertical line
         context.beginPath();
         context.strokeStyle = '#ff0000';
         context.moveTo(lineLeftOffset, scale.top);
         context.lineTo(lineLeftOffset, scale.bottom);
         context.stroke();
-  
+
         // write label
         context.fillStyle = "#ff0000";
         context.textAlign = 'center';
         context.fillText('Disaster', lineLeftOffset, (scale.bottom - scale.top) / 2 + scale.top);
     },
-  
+
     afterDatasetsDraw: function (chart, easing) {
         if (chart.config.lineAtIndex) {
             chart.config.lineAtIndex.forEach(pointIndex => this.renderVerticalLine(chart, pointIndex));

@@ -1,41 +1,13 @@
-// takes selector id, keypair list comma delimited key=value pairs
-function setSelectorContents(id, values) {
-    for (var value in values.split(",")) {
-        $("#" + id).append(new Option(value.split("=")[0], value.split("=")[1]);
-    }
-}
-
-function clearSelector(id) {
-    $("#" + id).empty();
-}
 
 $("#select_state").change(function () {
     // TODO AJAX for new values
-    clearSelector("select_county");
-    clearSelector("select_disaster");
-    clearSelector("select_category");
-    clearSelector("select_category_name");
-    $.ajax({
-        url: 'http://localhost:8081/fields?category=county&state=NJ',
-        dataType: 'application/json',
-        success: function (data) {
-            setSelectorContents("select_state", data)
-        }
-    });
-});
-
-$("#select_county").change(function () {
-    // TODO AJAX for new values
-    clearSelector("select_disaster");
-    clearSelector("select_category");
-    clearSelector("select_category_name");
-    $.ajax({
-        url: 'http://localhost:8081/fields?category=disaster&state=NJ&county=aerb',
-        dataType: 'application/json',
-        success: function (data) {
-            setSelectorContents("select_county", data)
-        }
-    });
+    var state = $(this).val();
+    new_items = []
+    var optionsAsString = "";
+    for (var i = 0; i < productArray.length; i++) {
+        optionsAsString += "<option value='" + productArray[i] + "'>" + productArray[i] + "</option>";
+    }
+    $('select[name="inptProduct"]').append(optionsAsString);
 });
 
 const verticalLinePlugin = {

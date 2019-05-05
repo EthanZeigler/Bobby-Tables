@@ -1,7 +1,7 @@
 // takes selector id, keypair list comma delimited key=value pairs
 function setSelectorContents(id, values) {
     for (var value in values.split(",")) {
-        $("#" + id).append(new Option(value.split("=")[0], value.split("=")[1]);
+        $("#" + id).append(new Option(value.split("=")[0], value.split("=")[1]));
     }
 }
 
@@ -9,17 +9,27 @@ function clearSelector(id) {
     $("#" + id).empty();
 }
 
-$("#select_state").change(function () {
+$(document).ready(function () {
     // TODO AJAX for new values
     clearSelector("select_county");
     clearSelector("select_disaster");
     clearSelector("select_category");
     clearSelector("select_category_name");
     $.ajax({
-        url: 'http://localhost:8081/fields?category=county&state=NJ',
+        url: 'http://localhost:9000/fields?category=county&state=NJ',
         dataType: 'application/json',
         success: function (data) {
-            setSelectorContents("select_state", data)
+            console.log("success")
+            console.log(data);
+            setSelectorContents("select_state", data);
+        },
+        complete: function (data) {
+            console.log("complete")
+            console.log(data);
+            setSelectorContents("select_state", data);
+        },
+        error: function (data) {
+            console.log(data);
         }
     });
 });

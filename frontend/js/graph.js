@@ -1,8 +1,8 @@
 // takes selector id, keypair list comma delimited key=value pairs
 function setSelectorContents(id, values) {
-    for (var value in values.split(",")) {
+    values.split(",").forEach(function(value) {
         $("#" + id).append(new Option(value.split("=")[0], value.split("=")[1]));
-    }
+    });
 }
 
 function clearSelector(id) {
@@ -16,21 +16,32 @@ $(document).ready(function () {
     clearSelector("select_category");
     clearSelector("select_category_name");
     $.ajax({
-        url: 'http://localhost:9000/fields?category=county&state=NJ',
+        url: 'http://localhost:9000/fields?state=NJ',
         dataType: 'application/json',
-        success: function (data) {
-            console.log("success")
-            console.log(data);
-            setSelectorContents("select_state", data);
-        },
         complete: function (data) {
             console.log("complete")
             console.log(data);
-            setSelectorContents("select_state", data);
+            setSelectorContents("select_state", data.responseText);
         },
         error: function (data) {
             console.log(data);
         }
+    });
+});
+
+$("#select_state").change(function () {
+    // TODO AJAX for new values
+    clearSelector("select_county");
+    clearSelector("select_disaster");
+    clearSelector("select_category");
+    clearSelector("select_category_name");
+    $.ajax({
+        url: 'http://localhost:9000/fields?state=' + $("#select_state").val();
+        dataType: 'application/json',
+        complete: function (data) {
+            console.log(data);
+            setSelectorContents("select_county", data.responseText);
+        },
     });
 });
 
@@ -40,10 +51,10 @@ $("#select_county").change(function () {
     clearSelector("select_category");
     clearSelector("select_category_name");
     $.ajax({
-        url: 'http://localhost:8081/fields?category=disaster&state=NJ&county=aerb',
+        url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val(),
         dataType: 'application/json',
         success: function (data) {
-            setSelectorContents("select_county", data)
+            setSelectorContents("select_disaster", data.responseText);
         }
     });
 });

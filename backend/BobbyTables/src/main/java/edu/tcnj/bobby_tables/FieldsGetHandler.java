@@ -12,7 +12,10 @@ public class FieldsGetHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange he) throws IOException {
         // FIXME real data
-        String response = "{msg: \"example data\"}";
+
+        String response = "New Jersey=NJ,Pensylvania=PA";
+        System.out.print(he.getRequestURI());
+        
         Headers responseHeaders = he.getResponseHeaders();
         responseHeaders.add("Access-Control-Allow-Origin", "*");
         responseHeaders.add("Content-type", "application/json");

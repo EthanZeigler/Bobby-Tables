@@ -41,7 +41,7 @@ $("#select_state").change(function () {
         complete: function (data) {
             console.log(data);
             setSelectorContents("select_county", data.responseText);
-        },
+        }
     });
 });
 

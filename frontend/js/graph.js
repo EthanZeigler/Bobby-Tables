@@ -55,6 +55,7 @@ $(function() {
             url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val(),
             dataType: 'application/json',
             success: function (data) {
+                console.log(data);
                 setSelectorContents("select_disaster", data.responseText);
             }
         });
@@ -68,6 +69,7 @@ $(function() {
             url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&" + $("#select_disaster").val(),
             dataType: 'application/json',
             success: function (data) {
+                console.log(data);
                 setSelectorContents("select_category", data.responseText);
             }
         });
@@ -80,6 +82,7 @@ $(function() {
             url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val(),
             dataType: 'application/json',
             success: function (data) {
+                console.log(data);
                 setSelectorContents("select_category", data.responseText);
             }
         });
@@ -91,6 +94,7 @@ $(function() {
             url: 'http://localhost:9000/data?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val() + "&category_name=" + $("#select_category_name").val(),
             dataType: 'application/json',
             success: function (data) {
+                console.log(data);
                 setSelectorContents("select_category", data.responseText);
             }
         });

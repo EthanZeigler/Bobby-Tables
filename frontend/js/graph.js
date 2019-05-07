@@ -46,7 +46,7 @@ $(function() {
         });
     });
 
-    $("#select_county").change(function () {
+    $("#select_county").on('change', function () {
         // TODO AJAX for new values
         clearSelector("select_disaster");
         clearSelector("select_category");
@@ -60,7 +60,7 @@ $(function() {
         });
     });
 
-    $("#select_disaster").change(function () {
+    $("#select_disaster").on('change', function () {
         // TODO AJAX for new values
         clearSelector("select_category");
         clearSelector("select_category_name");
@@ -73,7 +73,7 @@ $(function() {
         });
     });
 
-    $("#select_category").change(function () {
+    $("#select_category").on('change', function () {
         // TODO AJAX for new values
         clearSelector("select_category_name");
         $.ajax({
@@ -85,7 +85,7 @@ $(function() {
         });
     });
 
-    $("#button_apply").click(function () {
+    $("#button_apply").on('click', function () {
         // TODO AJAX for new values
         $.ajax({
             url: 'http://localhost:9000/data?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val() + "&category_name=" + $("#select_category_name").val(),

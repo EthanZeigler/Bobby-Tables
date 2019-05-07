@@ -14,7 +14,7 @@ public class FieldsGetHandler implements HttpHandler {
         // FIXME real data
 
         String response = "New Jersey=NJ,Pensylvania=PA";
-        System.out.print(he.getRequestURI());
+        System.out.println(he.getRequestURI());
         
         Headers responseHeaders = he.getResponseHeaders();
         responseHeaders.add("Access-Control-Allow-Origin", "*");

@@ -1,5 +1,6 @@
 // takes selector id, keypair list comma delimited key=value pairs
 function setSelectorContents(id, values) {
+    $("#" + id).append(new Option("", ""));
     values.split(",").forEach(function(value) {
         $("#" + id).append(new Option(value.split("=")[0], value.split("=")[1]));
     });
@@ -9,14 +10,14 @@ function clearSelector(id) {
     $("#" + id).empty();
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     // TODO AJAX for new values
     clearSelector("select_county");
     clearSelector("select_disaster");
     clearSelector("select_category");
     clearSelector("select_category_name");
     $.ajax({
-        url: 'http://localhost:9000/fields?state=NJ',
+        url: 'http://localhost:9000/fields',
         dataType: 'application/json',
         complete: function (data) {
             console.log("complete")
@@ -28,34 +29,71 @@ $(document).ready(function () {
         }
     });
 });
-
-$("#select_state").change(function () {
-    // TODO AJAX for new values
-    clearSelector("select_county");
-    clearSelector("select_disaster");
-    clearSelector("select_category");
-    clearSelector("select_category_name");
-    $.ajax({
-        url: 'http://localhost:9000/fields?state=' + $("#select_state").val(),
-        dataType: 'application/json',
-        complete: function (data) {
-            console.log(data);
-            setSelectorContents("select_county", data.responseText);
-        }
+$(function() {
+    $("#select_state").on('change', function () {
+        // TODO AJAX for new values
+        clearSelector("select_county");
+        clearSelector("select_disaster");
+        clearSelector("select_category");
+        clearSelector("select_category_name");
+        $.ajax({
+            url: 'http://localhost:9000/fields?state=' + $("#select_state").val(),
+            dataType: 'application/json',
+            complete: function (data) {
+                console.log(data);
+                setSelectorContents("select_county", data.responseText);
+            }
+        });
     });
-});
 
-$("#select_county").change(function () {
-    // TODO AJAX for new values
-    clearSelector("select_disaster");
-    clearSelector("select_category");
-    clearSelector("select_category_name");
-    $.ajax({
-        url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val(),
-        dataType: 'application/json',
-        success: function (data) {
-            setSelectorContents("select_disaster", data.responseText);
-        }
+    $("#select_county").change(function () {
+        // TODO AJAX for new values
+        clearSelector("select_disaster");
+        clearSelector("select_category");
+        clearSelector("select_category_name");
+        $.ajax({
+            url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val(),
+            dataType: 'application/json',
+            success: function (data) {
+                setSelectorContents("select_disaster", data.responseText);
+            }
+        });
+    });
+
+    $("#select_disaster").change(function () {
+        // TODO AJAX for new values
+        clearSelector("select_category");
+        clearSelector("select_category_name");
+        $.ajax({
+            url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&" + $("#select_disaster").val(),
+            dataType: 'application/json',
+            success: function (data) {
+                setSelectorContents("select_category", data.responseText);
+            }
+        });
+    });
+
+    $("#select_category").change(function () {
+        // TODO AJAX for new values
+        clearSelector("select_category_name");
+        $.ajax({
+            url: 'http://localhost:9000/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val(),
+            dataType: 'application/json',
+            success: function (data) {
+                setSelectorContents("select_category", data.responseText);
+            }
+        });
+    });
+
+    $("#button_apply").click(function () {
+        // TODO AJAX for new values
+        $.ajax({
+            url: 'http://localhost:9000/data?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val() + "&category_name=" + $("#select_category_name").val(),
+            dataType: 'application/json',
+            success: function (data) {
+                setSelectorContents("select_category", data.responseText);
+            }
+        });
     });
 });
 

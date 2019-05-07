@@ -62,7 +62,7 @@ $("#select_county").change(function () {
 const verticalLinePlugin = {
     getLinePosition: function (chart, pointIndex) {
         const meta = chart.getDatasetMeta(0); // first dataset is used to discover X coordinate of a point
-        const data = meta.data; p
+        const data = meta.data;
         return data[pointIndex]._model.x;
     },
     renderVerticalLine: function (chartInstance, pointIndex) {

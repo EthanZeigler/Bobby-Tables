@@ -36,7 +36,7 @@ $("#select_state").change(function () {
     clearSelector("select_category");
     clearSelector("select_category_name");
     $.ajax({
-        url: 'http://localhost:9000/fields?state=' + $("#select_state").val();
+        url: 'http://localhost:9000/fields?state=' + $("#select_state").val(),
         dataType: 'application/json',
         complete: function (data) {
             console.log(data);

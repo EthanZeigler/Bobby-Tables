@@ -94,8 +94,8 @@ $(function() {
             url: 'http://localhost:9001/fields?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val() + "&category_name=" + $("#select_category_name").val(),
             dataType: 'application/json',
             complete: function (data) {
-                $("#chart_container").html('<canvas id="myChart" class="col-auto w-75"></canvas>');
-                loadChartJS(JSON.parse(data.responseText.split("!@##@!")[0]), JSON.parse(data.responseText.split("!@##@!")[1]));
+                $("#chart_container").html('<canvas id="myChart" class="be_big_idiot"></canvas>');
+                loadChartJS(JSON.parse(data.responseText));
             }
         });
     });
@@ -133,7 +133,7 @@ const verticalLinePlugin = {
 };
 Chart.plugins.register(verticalLinePlugin);
 
-function loadChartJS(dataBlock, settingsBlock) {
+function loadChartJS(dataBlock) {
     var ctx = document.getElementById('myChart').getContext('2d');
     //var cape = ['58106', '58053', '58720', '59768', '60288', '60668', '61937'];
     //var jackson = ['19956', '19874', '20102', '20246', '20302', '20402', '20517'];
@@ -145,7 +145,7 @@ function loadChartJS(dataBlock, settingsBlock) {
     } else {
         datapoints = rand;
     }*/
-    var datapoints = 0;
+    var datapoints = dataBlock;
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {

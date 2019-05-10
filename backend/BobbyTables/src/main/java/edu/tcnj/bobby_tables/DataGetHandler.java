@@ -23,7 +23,7 @@ public class DataGetHandler implements HttpHandler {
             // empty, provide state
         } else {
             // get keypairs
-            String[] paramStrings = query.split("?")[1].split("&");
+            String[] paramStrings = query.split("\\?")[1].split("&");
             Map<String, String> params = new HashMap<String, String>();
             for (String str : paramStrings) {
                 params.put(str.split("=")[0], str.split("=")[1]);

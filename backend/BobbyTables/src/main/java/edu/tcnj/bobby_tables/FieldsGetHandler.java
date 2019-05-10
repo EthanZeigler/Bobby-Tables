@@ -13,7 +13,6 @@ public class FieldsGetHandler implements HttpHandler {
     public void handle(HttpExchange he) throws IOException {
         // FIXME real data
 
-        String response = "New Jersey=NJ,Pensylvania=PA";
         System.out.println(he.getRequestURI());
         
         Headers responseHeaders = he.getResponseHeaders();

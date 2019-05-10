@@ -94,8 +94,8 @@ $(function() {
             url: 'http://localhost:9000/data?state=' + $("#select_state").val() + "&county=" + $("#select_county").val() + "&disaster=" + $("#select_disaster").val() + "&category=" + $("#select_category").val() + "&category_name=" + $("#select_category_name").val(),
             dataType: 'application/json',
             complete: function (data) {
-                console.log(data);
-                setSelectorContents("select_category", data.responseText);
+                $("#chart_container").html('<canvas id="myChart" class="col-auto w-75"></canvas>');
+                loadChartJS(JSON.parse(data.responseText.split("!@##@!")[0]), JSON.parse(data.responseText.split("!@##@!")[1]));
             }
         });
     });
@@ -134,50 +134,53 @@ const verticalLinePlugin = {
 Chart.plugins.register(verticalLinePlugin);
 
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, .2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'My Chart'
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }],
-            xAxes: [{
-                type: 'time',
-                time: {
-                    displayFormats: {
-                        quarter: 'MMM YYYY'
-                    }
-                }
-            }]
-        },
-        legend: {
-            display: true,
-            labels: {
-                fontColor: 'rgb(255, 99, 132)',
-                position: 'right'
-            }
-        },
-        responsive: false
-    }
-});
+function loadChartJS(dataBlock, settingsBlock) {
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: 
+        // data: {
+        //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        //     datasets: [{
+        //         label: '# of Votes',
+        //         data: [12, 19, 3, 5, 2, 3],
+        //         backgroundColor: [
+        //             'rgba(255, 99, 132, .2)',
+        //         ],
+        //         borderColor: [
+        //             'rgba(255, 99, 132, 1)',
+        //         ],
+        //         borderWidth: 1
+        //     }]
+        // },
+        // options: {
+        //     title: {
+        //         display: true,
+        //         text: 'My Chart'
+        //     },
+        //     scales: {
+        //         yAxes: [{
+        //             ticks: {
+        //                 beginAtZero: true
+        //             }
+        //         }],
+        //         xAxes: [{
+        //             type: 'time',
+        //             time: {
+        //                 displayFormats: {
+        //                     quarter: 'MMM YYYY'
+        //                 }
+        //             }
+        //         }]
+        //     },
+        //     legend: {
+        //         display: true,
+        //         labels: {
+        //             fontColor: 'rgb(255, 99, 132)',
+        //             position: 'right'
+        //         }
+        //     },
+        //     responsive: false
+        // }
+    });
+};

@@ -133,54 +133,54 @@ const verticalLinePlugin = {
 };
 Chart.plugins.register(verticalLinePlugin);
 
-
 function loadChartJS(dataBlock, settingsBlock) {
     var ctx = document.getElementById('myChart').getContext('2d');
+    //var cape = ['58106', '58053', '58720', '59768', '60288', '60668', '61937'];
+    //var jackson = ['19956', '19874', '20102', '20246', '20302', '20402', '20517'];
+    //var rand = ['58106', '58053', '58720', '59768', '60288', '60668', '61937'];
+    /*if ($("#select_state").val() == 'New Jersey') {
+       datapoints = cape;
+    } else if ($("#select_state").val() == 'Florida') {
+        datapoints = jackson;
+    } else {
+        datapoints = rand;
+    }*/
+    var datapoints = 0;
     var myChart = new Chart(ctx, {
         type: 'line',
-        //data: 
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+         labels: ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010','2011','2012','2013','2014', '2015','2016', '2017'],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Numbers of Jobs',
+                data: datapoints,
                 backgroundColor: [
-                    'rgba(255, 99, 132, .2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
                 ],
                 borderColor: [
                     'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
                 ],
                 borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
             }]
         },
-        options: {
-            title: {
-                display: true,
-                text: 'My Chart'
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }],
-                xAxes: [{
-                    type: 'time',
-                    time: {
-                        displayFormats: {
-                            quarter: 'MMM YYYY'
-                        }
-                    }
-                }]
-            },
-            legend: {
-                display: true,
-                labels: {
-                    fontColor: 'rgb(255, 99, 132)',
-                    position: 'right'
-                }
-            },
-            responsive: false
-        }
+        responsive: false
+    }
     });
 };

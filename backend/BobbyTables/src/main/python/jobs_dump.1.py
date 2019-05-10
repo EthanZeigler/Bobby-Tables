@@ -15,7 +15,7 @@ with open(filename, 'rt') as csvfile:
         rownum = 2
         for x in range(2001, 2019):
             try:
-                cur.execute("INSERT INTO statistic (entry_id, date, category, name, data) VALUES (%s, to_date(%s, 'YYYY'), %s, %s, %s);", (count, year , 'Economics', 'Total Jobs', row[rownum],))
+                cur.execute("INSERT INTO statistic (entry_id, date, category, name, data) VALUES (%s, to_date(%s, 'YYYY'), %s, %s, %s);", (count, year , 'Economics', 'Total Jobs', row[rownum]))
                 conn.commit()
                 cur.execute("INSERT INTO statistic_county_link (statistic, geofib) VALUES (%s, %s);", (row[0], int(count)))
                 conn.commit()
